@@ -17,6 +17,7 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1/edit
   def edit
+    @blog_item = Blog.friendly.find(params[:id])
   end
 
   # POST /blogs or /blogs.json
@@ -36,9 +37,10 @@ class BlogsController < ApplicationController
 
   # PATCH/PUT /blogs/1 or /blogs/1.json
   def update
+@blog_item = Blog.friendly.find(params[:id])
     respond_to do |format|
-      if @blog.update(blog_params)
-        format.html { redirect_to blog_url(@blog), notice: "Blog was successfully updated." }
+      if @blog_item.update(params.require(:blog).permit(:title,:body))
+        format.html { redirect_to blogs_path, notice: "The record was successfully updated." }
         format.json { render :show, status: :ok, location: @blog }
       else
         format.html { render :edit, status: :unprocessable_entity }

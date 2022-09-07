@@ -1,10 +1,21 @@
 <h1>Editing blog</h1>
 
-<%= render "form", blog: @blog %>
+<h1>Edit this Blog Item</h1>
 
-<br>
+<%= form_with(model: @blog_item) do |form| %>
+  
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
 
-<div>
-  <%= link_to "Show this blog", @blog %> |
-  <%= link_to "Back to blogs", blogs_path %>
+  <div>
+    <%= form.label :body, style: "display: block" %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
 </div>
