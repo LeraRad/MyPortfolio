@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: %i[ show edit update destroy ]
+  before_action :set_blog, only: [:show, :edit, :update, :destroy, :toggle_status ]
 
   # GET /blogs or /blogs.json
   def index
@@ -17,6 +17,7 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1/edit
   def edit
+    @blog_item = Blog.friendly.find(params[:id])
   end
 
   # POST /blogs or /blogs.json
@@ -36,9 +37,10 @@ class BlogsController < ApplicationController
 
   # PATCH/PUT /blogs/1 or /blogs/1.json
   def update
+@blog_item = Blog.friendly.find(params[:id])
     respond_to do |format|
-      if @blog.update(blog_params)
-        format.html { redirect_to blog_url(@blog), notice: "Blog was successfully updated." }
+      if @blog_item.update(params.require(:blog).permit(:title,:body))
+        format.html { redirect_to blogs_path, notice: "The record was successfully updated." }
         format.json { render :show, status: :ok, location: @blog }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,10 +59,20 @@ class BlogsController < ApplicationController
     end
   end
 
+  def toggle_status
+    if @blog.draft?
+      @blog.published!
+    elsif @blog.published?
+      @blog.draft!
+    end
+    
+    redirect_to blogs_url, notice: 'Post status has been updated.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_blog
-      @blog = Blog.find(params[:id])
+      @blog = Blog.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

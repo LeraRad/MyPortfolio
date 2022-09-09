@@ -1,8 +1,6 @@
-<h1>Editing blog</h1>
+<h1>Edit this Portfolio Item</h1>
 
-<h1>Edit this Blog Item</h1>
-
-<%= form_with(model: @blog_item) do |form| %>
+<%= form_with(model: @portfolio_item) do |form| %>
   
   <div>
     <%= form.label :title, style: "display: block" %>
@@ -10,12 +8,17 @@
   </div>
 
   <div>
+    <%= form.label :subtitle, style: "display: block" %>
+    <%= form.text_area :subtitle %>
+  </div>
+
+  <div>
     <%= form.label :body, style: "display: block" %>
     <%= form.text_area :body %>
   </div>
+
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
-</div>
