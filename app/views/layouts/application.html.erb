@@ -7,7 +7,8 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application",media: 'all', "data-turbo-track": "reload" %>
-    <%= javascript_include_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
@@ -20,6 +21,8 @@
     <%= login_helper %>
     
     <%= yield %>
+
+    <%= copyright_generator %>
 
     <%= source_helper("application") %>
 

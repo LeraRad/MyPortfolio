@@ -67,3 +67,11 @@ end
 
 gem 'friendly_id', '~> 5.4.0'
 gem 'devise', '~> 4.9'
+
+gem 'bootstrap', '~> 5.3.0.alpha3'
+
+gem "cssbundling-rails", "~> 1.1"
+
+gem "jsbundling-rails", "~> 1.1"
+
+gem 'lerarad_view_tool', '~> 0.1.0', git: 'https://github.com/LeraRad/lerarad_view_tool'
